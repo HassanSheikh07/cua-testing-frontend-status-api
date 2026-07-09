@@ -1,0 +1,13 @@
+{
+  "name": "cua-status-api",
+  "version": "1.0.0",
+  "description": "Status API for CUA frontend testing",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "start": "func start --javascript"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.7.3"
+  },
+  "devDependencies": {}
+}
