@@ -76,12 +76,22 @@ function extractValueAfterLabel (text: string, label: string): string {
 }
 
 function extractDataverseRecordId (text: string): string {
-  const value = extractValueAfterLabel(text, 'Dataverse Record ID:')
+  if (!text) {
+    return ''
+  }
 
-  const guidMatch = value.match(/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/)
+  const guidRegex = /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/
 
-  if (guidMatch) {
-    return guidMatch[0]
+  const lowerText = text.toLowerCase()
+  const labelIndex = lowerText.indexOf('dataverse record id')
+
+  if (labelIndex !== -1) {
+    const textAfterLabel = text.substring(labelIndex)
+    const guidMatch = textAfterLabel.match(guidRegex)
+
+    if (guidMatch) {
+      return guidMatch[0]
+    }
   }
 
   return ''
